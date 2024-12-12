@@ -4,7 +4,8 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif; /* Change the body text font to Open Sans */
-    background-color: #000; /* Set the background to black */
+    background: url('/static/lala.jpg') no-repeat center center fixed;
+background-size: cover; /* Ensure the image covers the entire background */
     color: #f5f5f5; /* Light font color for readability */
 }
 
@@ -23,10 +24,14 @@ html, body {
 form {
     display: block;
     width: 100%;
-    background-color: #222; /* Darker background for the form */
+    background-color: rgba(34, 34, 34, 0.6); /* Adjusted transparency (Alpha: 0.6) */
     border-radius: 12px; /* Make the form edges round */
     padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Adds depth to the form */
+    background-color: rgba(34, 34, 34, 0.85); /* Slightly lighter background */
+    
 }
+
 
 /* Style for form elements */
 fieldset {
@@ -34,6 +39,7 @@ fieldset {
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px; /* Round corners of the fieldset */
+    background-color: rgba(34, 34, 34, 0.5); /* Slight transparency for fieldset */
 }
 
 legend {
@@ -41,50 +47,53 @@ legend {
     font-weight: bold;
     padding: 0 10px;
     font-size: 1.2em;
-    color: #fff; /* White color for the legend text */
+    color: #F0F0F0; /* Light blue color for the legend text */
 }
+
 
 .form-group {
     margin-bottom: 15px;
 }
 
+
 input[type="number"], input[type="text"], select {
     width: 50%; /* Reduced width of the input boxes and options */
-    padding: 6px; /* Smaller padding for the input box */
+    padding: 8px; /* Slightly larger padding for better usability */
     margin: 5px 0;
     box-sizing: border-box;
     border-radius: 8px; /* Make input fields and select boxes rounder */
-    border: 1px solid #555; /* Lighter border for input fields */
-    background-color: #333; /* Dark background for input fields and select boxes */
-    color: #fff; /* White text in input fields */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle light border */
+    background-color: rgba(50, 50, 50, 0.8); /* Dark transparent background for input fields */
+    color: #f5f5f5; /* White text in input fields */
 }
 
 input[type="number"]:focus, input[type="text"]:focus, select:focus {
-    border-color: #4CAF50; /* Green border when focused */
+    border-color: #A8E6CF; /* Gold border when focused */
     outline: none; /* Remove outline */
 }
 
 /* Add styles for the button */
 button {
     padding: 12px 24px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #F0F0F0; /* Gold color for the button */
+    color: black; /* Dark text for contrast on the button */
     border: none;
     border-radius: 8px; /* Round the button */
     cursor: pointer;
     font-size: 1em;
     font-family: 'Poppins', sans-serif; /* Button font style */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #A8E6CF ; /* Slightly darker gold on hover */
 }
 
 /* Styling for prediction or error message */
 .result, .error {
     margin-top: 20px;
     padding: 15px;
-    background-color: #333;
+    background-color: rgba(34, 34, 34, 0.7); /* More transparent background */
     border: 1px solid #444;
     border-radius: 8px; /* Rounded corners for result and error messages */
     color: #fff;
