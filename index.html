@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Loan Prediction</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Home Loan Prediction</h1>
+        
+        <!-- Display Prediction Result at the Top -->
+        {% if prediction %}
+            <div class="result">
+                <h2>Prediction: {{ prediction }}</h2>
+            </div>
+        {% elif error %}
+            <div class="error">
+                <h2>Error: {{ error }}</h2>
+            </div>
+        {% endif %}
+
+        <form method="POST" action="/predict">
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div class="form-group">
+                    <label for="DAYS_BIRTH">Age (in Years):</label>
+                    <input type="number" id="DAYS_BIRTH" name="DAYS_BIRTH" required>
+                </div>
+                <div class="form-group">
+                    <label for="DAYS_EMPLOYED">The number of years the customer has been employed:</label>
+                    <input type="number" id="DAYS_EMPLOYED" name="DAYS_EMPLOYED" required>
+                </div>
+                <div class="form-group">
+                    <label for="DAYS_REGISTRATION">The number of days since the customer registered with the organization:</label>
+                    <input type="number" id="DAYS_REGISTRATION" name="DAYS_REGISTRATION" required>
+                </div>
+                <div class="form-group">
+                    <label for="CNT_CHILDREN">The number of children:</label>
+                    <input type="number" id="CNT_CHILDREN" name="CNT_CHILDREN" required>
+                </div>
+                <div class="form-group">
+                    <label for="NAME_INCOME_TYPE">Income Type:</label>
+                    <select id="NAME_INCOME_TYPE" name="NAME_INCOME_TYPE" required>
+                        <option value="salary">Salary</option>
+                        <option value="self-employed">Self-Employed</option>
+                        <option value="investment_income">Investment Income</option>
+                        <option value="rental_income">Rental Income</option>
+                        <option value="pension">Pension</option>
+                        <option value="alimony">Alimony</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="NAME_EDUCATION_TYPE">Education Level:</label>
+                    <select id="NAME_EDUCATION_TYPE" name="NAME_EDUCATION_TYPE" required>
+                        <option value="High School">High School</option>
+                        <option value="Associate Degree">Associate Degree</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="Doctorate/PhD">Doctorate/PhD</option>
+                        <option value="Vocational/Technical Certification">Vocational/Technical Certification</option>
+                        <option value="Some College (No Degree)">Some College (No Degree)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="NAME_FAMILY_STATUS">Family Status:</label>
+                    <select id="NAME_FAMILY_STATUS" name="NAME_FAMILY_STATUS" required>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                        <option value="Separated">Separated</option>
+                        <option value="Living with Partner">Living with Partner</option>
+                        <option value="Single Parent">Single Parent</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="CODE_GENDER">Gender:</label>
+                    <select id="CODE_GENDER" name="CODE_GENDER" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="NAME_HOUSING_TYPE">Housing Type:</label>
+                    <select id="NAME_HOUSING_TYPE" name="NAME_HOUSING_TYPE" required>
+                        <option value="Owned">Owned</option>
+                        <option value="Rented">Rented</option>
+                        <option value="Mortgage">Mortgage</option>
+                        <option value="Living with Family/Friends">Living with Family/Friends</option>
+                        <option value="Social Housing">Social Housing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="FLAG_OWN_REALTY">Own Realty (Yes/No):</label>
+                    <select id="FLAG_OWN_REALTY" name="FLAG_OWN_REALTY" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="FLAG_OWN_CAR">Own Car (Yes/No):</label>
+                    <select id="FLAG_OWN_CAR" name="FLAG_OWN_CAR" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Loan Details</legend>
+                <div class="form-group">
+                    <label for="AMT_CREDIT">The credit amount requested by the customer:</label>
+                    <input type="number" id="AMT_CREDIT" name="AMT_CREDIT" required>
+                </div>
+                <div class="form-group">
+                    <label for="AMT_INCOME_TOTAL">The total income of the customer:</label>
+                    <input type="number" id="AMT_INCOME_TOTAL" name="AMT_INCOME_TOTAL" required>
+                </div>
+                <div class="form-group">
+                    <label for="AMT_ANNUITY">The installment amount:</label>
+                    <input type="number" id="AMT_ANNUITY" name="AMT_ANNUITY" required>
+                </div>
+                <div class="form-group">
+                    <label for="AMT_GOODS_PRICE">The price of the goods the customer plans to purchase with the loan:</label>
+                    <input type="number" id="AMT_GOODS_PRICE" name="AMT_GOODS_PRICE" required>
+                </div>
+                <div class="form-group">
+                    <label for="YEARS_BUILD_AVG">The average age of the building:</label>
+                    <input type="number" id="YEARS_BUILD_AVG" name="YEARS_BUILD_AVG" required>
+                </div>
+                <div class="form-group">
+                    <label for="AMT_REQ_CREDIT_BUREAU_YEAR">The number of times the customer requested a credit in the past year :</label>
+                    <input type="number" id="AMT_REQ_CREDIT_BUREAU_YEAR" name="AMT_REQ_CREDIT_BUREAU_YEAR" required>
+                </div>
+                <div class="form-group">
+                    <label for="EXT_SOURCE_1">Credit risk score:</label>
+                    <input type="number" id="EXT_SOURCE_1" name="EXT_SOURCE_1" required>
+                </div>
+                <div class="form-group">
+                    <label for="APARTMENTS_AVG">The average number of apartments in the area:</label>
+                    <input type="number" id="APARTMENTS_AVG" name="APARTMENTS_AVG" required>
+                </div>
+                <div class="form-group">
+                    <label for="YEARS_BEGINEXPLUATATION_AVG">The average number of years since the start of operation:</label>
+                    <input type="number" id="YEARS_BEGINEXPLUATATION_AVG" name="YEARS_BEGINEXPLUATATION_AVG" required>
+                </div>
+            </fieldset>
+
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
