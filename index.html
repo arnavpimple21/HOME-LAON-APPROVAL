@@ -132,17 +132,24 @@
                     <input type="number" id="YEARS_BUILD_AVG" name="YEARS_BUILD_AVG" required>
                 </div>
                 <div class="form-group">
-                    <label for="AMT_REQ_CREDIT_BUREAU_YEAR">The number of times the customer requested a credit in the past year :</label>
+                    <label for="AMT_REQ_CREDIT_BUREAU_YEAR">The number of times the customer requested a credit in the past year:</label>
                     <input type="number" id="AMT_REQ_CREDIT_BUREAU_YEAR" name="AMT_REQ_CREDIT_BUREAU_YEAR" required>
                 </div>
                 <div class="form-group">
                     <label for="EXT_SOURCE_1">Credit risk score:</label>
-                    <input type="number" id="EXT_SOURCE_1" name="EXT_SOURCE_1" required>
+                    <select id="EXT_SOURCE_1" name="EXT_SOURCE_1" required>
+                        <option value="Good">Good</option>
+                        <option value="Bad">Bad</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="APARTMENTS_AVG">The average number of apartments in the area:</label>
-                    <input type="number" id="APARTMENTS_AVG" name="APARTMENTS_AVG" required>
+                    <label for="APARTMENTS_AVG">Condition of the apartment:</label>
+                    <select id="APARTMENTS_AVG" name="APARTMENTS_AVG" required>
+                        <option value="Good">Good</option>
+                        <option value="Bad">Bad</option>
+                    </select>
                 </div>
+                
                 <div class="form-group">
                     <label for="YEARS_BEGINEXPLUATATION_AVG">The average number of years since the start of operation:</label>
                     <input type="number" id="YEARS_BEGINEXPLUATATION_AVG" name="YEARS_BEGINEXPLUATATION_AVG" required>
