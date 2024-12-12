@@ -14,7 +14,7 @@ label_encoder_income_type = LabelEncoder()
 label_encoder_income_type.classes_ = np.array(['salary', 'self-employed', 'investment_income', 'rental_income', 'pension', 'alimony'])
 
 label_encoder_education_type = LabelEncoder()
-label_encoder_education_type.classes_ = np.array(['High School', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate/PhD', 'Vocational/Technical Certification', 'Some College (No Degree)'])
+label_encoder_education_type.classes_ = np.array(['High School', 'Associate Degree', "Bachelor's Degree", "Master's Degree", 'Doctorate/PhD', 'Vocational/Technical Certification', 'Some College (No Degree)'])
 
 label_encoder_family_status = LabelEncoder()
 label_encoder_family_status.classes_ = np.array(['Single', 'Married', 'Divorced', 'Widowed', 'Separated', 'Living with Partner', 'Single Parent'])
@@ -33,6 +33,10 @@ def process_input_data(form_data):
     form_data['NAME_FAMILY_STATUS'] = label_encoder_family_status.transform([form_data['NAME_FAMILY_STATUS']])[0]
     form_data['CODE_GENDER'] = label_encoder_gender.transform([form_data['CODE_GENDER']])[0]
     form_data['NAME_HOUSING_TYPE'] = label_encoder_housing_type.transform([form_data['NAME_HOUSING_TYPE']])[0]
+
+    # Convert EXT_SOURCE_1 and APARTMENTS_AVG to numeric values
+    form_data['EXT_SOURCE_1'] = 1 if form_data['EXT_SOURCE_1'] == 'Good' else 0
+    form_data['APARTMENTS_AVG'] = 1 if form_data['APARTMENTS_AVG'] == 'Good' else 0
 
     # Convert days values to negative
     form_data['DAYS_BIRTH'] = -form_data['DAYS_BIRTH']
@@ -68,8 +72,8 @@ def predict():
             'NAME_HOUSING_TYPE': request.form['NAME_HOUSING_TYPE'],
             'FLAG_OWN_REALTY': 1 if request.form['FLAG_OWN_REALTY'].lower() == 'yes' else 0,
             'FLAG_OWN_CAR': 1 if request.form['FLAG_OWN_CAR'].lower() == 'yes' else 0,
-            'EXT_SOURCE_1': float(request.form['EXT_SOURCE_1']),
-            'APARTMENTS_AVG': float(request.form['APARTMENTS_AVG']),
+            'EXT_SOURCE_1': request.form['EXT_SOURCE_1'],
+            'APARTMENTS_AVG': request.form['APARTMENTS_AVG'],
             'YEARS_BEGINEXPLUATATION_AVG': float(request.form['YEARS_BEGINEXPLUATATION_AVG']),
         }
 
@@ -102,7 +106,7 @@ def predict():
 
         # Make prediction
         prediction = model.predict(input_data)[0]
-        result = "This client demonstrates the ability to comfortably repay the loan" if prediction == 0 else "The client presents a higher risk profile for loan approval"
+        result = "The client presents a higher risk profile for loan approval" if prediction == 1 else "This client demonstrates the ability to comfortably repay the loan"
         return render_template('index.html', prediction=result)
 
     except Exception as e:
